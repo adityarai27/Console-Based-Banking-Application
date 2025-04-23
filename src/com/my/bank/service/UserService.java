@@ -18,4 +18,8 @@ public class UserService {
     public  boolean  addNewCustomer(String username, String password, String contact){
         return userRepo.addNewCustomer(username, password, contact);
     }
+
+    public Double checkBankBalance(String userId){
+        return userRepo.checkBankBalance(userId);
+    }
 }

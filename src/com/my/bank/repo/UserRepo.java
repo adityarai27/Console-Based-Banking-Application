@@ -1,0 +1,47 @@
+package com.my.bank.repo;
+
+import com.my.bank.entity.User;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class UserRepo {
+
+    private static Set<User> users = new HashSet<>();
+
+
+    static {
+
+        User user1 = new User("admin", "admin","1234567", "admin", 0.0);
+        User user2 =  new User("user2", "user2", "12345678","user", 1000.0);
+        User user3 = new User("user3", "user3", "123456789", "user", 2000.0);
+        User user4 = new User("user4", "user4", "1234567890", "user", 3000.0);
+
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        users.add(user4);
+    }
+
+    public void printUsers(){
+        System.out.println(users);
+    }
+
+    public User login(String username, String password){
+        List<User> finalList = users.stream().filter(user -> user.getUsername().equals(username) && user.getPassword().equals(password)).collect(Collectors.toList());
+
+        if (!finalList.isEmpty()){
+            return finalList.get(0);
+        }else {
+            return null;
+        }
+    }
+
+
+    public  boolean  addNewCustomer(String username, String password, String contact){
+        User user = new User(username, password, contact, "user", 5000.0);
+        return users.add(user);
+    }
+}

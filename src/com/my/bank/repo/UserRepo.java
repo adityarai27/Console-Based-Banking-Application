@@ -25,7 +25,56 @@ public class UserRepo {
         users.add(user4);
     }
 
+
+    public boolean transferAmount(String userId, String payeeUserId, Double amount){
+
+        boolean isDebit = debit(userId, amount);
+        boolean isCredit = credit(payeeUserId, amount);
+
+        return isDebit && isCredit;
+    }
+
+    private boolean debit(String userId, Double amount){
+        User user = getUser(userId);
+        Double accountBalance = user.getAccountBalance();
+
+        users.remove(user);
+
+        Double finalBalance = accountBalance - amount;
+        user.setAccountBalance(finalBalance);
+
+        return users.add(user);
+
+    }
+
+    private boolean credit(String userId, Double amount){
+        User user = getUser(userId);
+        Double accountBalance = user.getAccountBalance();
+
+        users.remove(user);
+
+        Double finalBalance = accountBalance + amount;
+        user.setAccountBalance(finalBalance);
+
+        return users.add(user);
+
+    }
+
+
+    public User getUser(String userId){
+
+       List<User> result = users.stream().filter(user -> user.getUsername().equals(userId)).collect(Collectors.toList());
+        if (!result.isEmpty()){
+            return result.get(0);
+        }else {
+            return null;
+
+        }
+    }
+
+
     public Double checkBankBalance(String userId){
+
         List<User> result =  users.stream().filter(user -> user.getUsername().equals(userId)).collect(Collectors.toList());
 
         if (!result.isEmpty()){

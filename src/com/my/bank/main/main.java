@@ -87,10 +87,11 @@ public class main {
 
         boolean flag = true;
 
-        while (true) {
+        while (flag) {
 
             System.out.println("1. Exit/Logout");
             System.out.println("2. Check bank balance.");
+            System.out.println("3. Transfer fund.");
 
             int selectedOption = sc.nextInt();
 
@@ -107,13 +108,52 @@ public class main {
                        System.out.println("Check your username.");
                    }
                    break;
+                case 3:
+                    Main.fundTransfer(user);
+                    break;
                 default:
                     System.out.println("Wrong Choice");
             }
         }
     }
 
-    public Double checkBankBalance(String userId){
+    private void fundTransfer(User userDetails){
+        System.out.println("Enter payee account user id: ");
+        String payeeAccountId = sc.next();
+
+        User user = getUser(payeeAccountId);
+
+        if(user != null){
+            System.out.println("Enter amount to transfer");
+            Double amount = sc.nextDouble();
+
+            Double userAccountBalance = checkBankBalance(userDetails.getUsername());
+
+            if(userAccountBalance >= amount){
+                boolean result = userService.transferAmount(userDetails.getUsername(), payeeAccountId, amount);
+
+                if(result){
+                    System.out.println("Amount transfer successfully...");
+                }else {
+                    System.out.println("Transfer failed...");
+                }
+            }else {
+                System.out.println("You have insufficient: " +userAccountBalance);
+            }
+
+
+        }else {
+            System.out.println("Please enter valid username...");
+        }
+
+
+    }
+
+    private User getUser(String userId){
+        return userService.getUser(userId);
+    }
+
+    private Double checkBankBalance(String userId){
         return userService.checkBankBalance(userId);
     }
 }

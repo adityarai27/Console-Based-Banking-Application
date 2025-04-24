@@ -20,6 +20,15 @@ public class UserService {
     }
 
     public Double checkBankBalance(String userId){
+
         return userRepo.checkBankBalance(userId);
+    }
+
+    public User getUser(String userId){
+       return userRepo.getUser(userId);
+    }
+
+    public boolean transferAmount(String userId, String payeeUserId, Double amount){
+        return userRepo.transferAmount(userId, payeeUserId, amount);
     }
 }

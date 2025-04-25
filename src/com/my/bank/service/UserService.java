@@ -5,7 +5,7 @@ import com.my.bank.repo.UserRepo;
 
 public class UserService {
 
-    private final UserRepo userRepo = new UserRepo();
+    private UserRepo userRepo = new UserRepo();
 
     public void printUsers(){
         userRepo.printUsers();

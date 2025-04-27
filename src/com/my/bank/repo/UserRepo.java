@@ -88,6 +88,24 @@ public class UserRepo {
 
     }
 
+    public void printTransaction(String userId){
+      List<Transaction> fileterdTransaction = transactions.stream().filter(transaction -> transaction.getTransactionPerformedBy().equals(userId)).collect(Collectors.toList());
+
+        System.out.println("\tDate \t\t User Id  \t Amount \t Type \t Initial Balance \t Final Balance ");
+        System.out.println("_________________________________________________________________________________________");
+
+        for (Transaction t: fileterdTransaction) {
+            System.out.println(t.getTransactionDate()
+                    +"\t\t  "+t.getTransactionUserId()
+                    +"\t\t "+t.getTransactionAmount()
+                    +"\t\t"+t.getTransactionType()
+                    +"\t\t "+t.getInitialBalance()
+                    +"\t\t\t\t"+t.getFinalBalance()
+                    );
+        }
+        System.out.println("_________________________________________________________________________________________");
+    }
+
 
     public User getUser(String userId){
 

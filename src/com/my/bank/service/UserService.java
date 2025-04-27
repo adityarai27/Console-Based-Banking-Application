@@ -31,4 +31,8 @@ public class UserService {
     public boolean transferAmount(String userId, String payeeUserId, Double amount){
         return userRepo.transferAmount(userId, payeeUserId, amount);
     }
+
+    public void printTransaction(String userId){
+        userRepo.printTransaction(userId);
+    }
 }

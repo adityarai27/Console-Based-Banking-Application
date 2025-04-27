@@ -92,6 +92,7 @@ public class main {
             System.out.println("1. Exit/Logout");
             System.out.println("2. Check bank balance.");
             System.out.println("3. Transfer Fund.");
+            System.out.println("4. See all transaction.");
 
             int selectedOption = sc.nextInt();
 
@@ -111,10 +112,18 @@ public class main {
                 case 3:
                     Main.fundTransfer(user);
                     break;
+                case 4:
+                    Main.printTransaction(user.getUsername());
+                    break;
                 default:
                     System.out.println("Wrong Choice");
             }
         }
+    }
+
+
+    private void printTransaction(String userId){
+        userService.printTransaction(userId);
     }
 
     private void fundTransfer(User userDetails){

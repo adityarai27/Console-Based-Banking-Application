@@ -45,6 +45,7 @@ public class main {
 
             System.out.println("1. Exit/Logout");
             System.out.println("2. Create a customer account.");
+            System.out.println("3. See all transactions.");
 
             int selectedOption = sc.nextInt();
 
@@ -55,6 +56,11 @@ public class main {
                     break;
                 case 2:
                     Main.addNewCustomer();
+                    break;
+                case 3:
+                    System.out.println("Enter userId: ");
+                    String userId = sc.next();
+                    Main.printTransaction(userId);
                     break;
                 default:
                     System.out.println("Wrong Choice");

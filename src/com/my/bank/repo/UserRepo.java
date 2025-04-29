@@ -4,16 +4,14 @@ import com.my.bank.entity.Transaction;
 import com.my.bank.entity.User;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class UserRepo {
 
     private static Set<User> users = new HashSet<>();
     List<Transaction> transactions = new ArrayList<>();
+    Map<String, Boolean> chequeBookRequest = new HashMap<>();
 
 
     static {
@@ -29,6 +27,12 @@ public class UserRepo {
         users.add(user4);
     }
 
+    public Map<String, Boolean> getAllChequeBookRequest(){
+        return chequeBookRequest;
+    }
+    public void raiseChequeBookRequest(String userId){
+        chequeBookRequest.put(userId, false);
+    }
 
     public boolean transferAmount(String userId, String payeeUserId, Double amount){
 

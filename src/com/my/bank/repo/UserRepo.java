@@ -27,6 +27,26 @@ public class UserRepo {
         users.add(user4);
     }
 
+    public void approveChequeBookRequest(String userId){
+        if (chequeBookRequest.containsKey(userId)) {
+                chequeBookRequest.put(userId, true);
+            }
+        }
+
+
+    public List<String> getUserIdForCheckBookRequest(){
+
+        List<String> userIds = new ArrayList<>();
+
+        for(Map.Entry<String, Boolean> entry: chequeBookRequest.entrySet()){
+            if (!entry.getValue()){
+                userIds.add(entry.getKey());
+            }
+        }
+        return userIds;
+    }
+
+
     public Map<String, Boolean> getAllChequeBookRequest(){
         return chequeBookRequest;
     }
